@@ -1,0 +1,16 @@
+<h2><%= @group.name %></h2>
+<h3>Lunches today</h3>
+<% @group.todays_lunches.each do |lunch| %>
+  <%= link_to(lunch.name, lunch) %> (<%= lunch.registrations.count %>) <%= lunch.time %> <br/>
+<% end %>
+
+<h3>Add lunch</h3>
+<%= form_for @lunch, url: group_lunches_path(@group, @lunch) do |field| %>
+  <%= field.label :name %>
+  <%= field.text_field :name %> <br/>
+  <%= field.label :time %>
+  <%= field.datetime_select :time, :minute_step => 5 %><br/>
+  <%= field.hidden_field :group_id, :value => @group.id %>
+<% end %>
+
+<%= flash[:notice] %>
