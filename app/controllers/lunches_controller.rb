@@ -13,6 +13,6 @@ class LunchesController < ApplicationController
   end
 
   def post_params
-    params.require(:lunch).permit(:name, :time, :group_id)
+    params.require(:lunch).permit(:name, :time, :info, :group_id)
   end
 end

@@ -1,11 +1,13 @@
 <h2><%= @lunch.name %></h2>
+<%= @lunch.time_gmt %>
+<%= @lunch.info %>
 
 <h3>Registrations (<%= @lunch.registrations.count %>)</h3>
 <% @lunch.registrations.each do |registration| %>
   <%= registration.name %><br/>
 <% end %>
 
-<h3>Sign up for lunch!</h3>
+<h3>Sign up for lunch at "<%= @lunch.name %>"!</h3>
 <%= form_for Registration.new, url: registrations_path(:lunch_id => @lunch.id) do |field| %>
   <%= field.label :name %>
   <%= field.text_field :name %>
