@@ -15,6 +15,11 @@ class GroupsController < ApplicationController
     redirect_to group
   end
 
+  def logout
+    session[:group_id] = nil
+    redirect_to :root
+  end
+
   private
 
   def group_params

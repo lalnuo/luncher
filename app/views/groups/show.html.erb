@@ -1,19 +1,28 @@
 <h2><%= @group.name %></h2>
 <h3>Lunches today</h3>
 <% @group.todays_lunches.each do |lunch| %>
-  <%= link_to(lunch.name, lunch) %> (<%= lunch.registrations.count %>) <%= lunch.time_gmt %> <br/>
+  <%= link_to(lunch.name, group_lunch_path(@group, lunch)) %> (<%= lunch.registrations.count %>) <%= lunch.time_gmt %> <br/>
 <% end %>
 
 <h3>Add lunch</h3>
-<%= form_for @lunch, url: group_lunches_path(@group, @lunch) do |field| %>
-  <%= field.label :name %>
-  <%= field.text_field :name %> <br/>
-  <%= field.label :time %>
-  <%= field.datetime_select :time, :minute_step => 5 %><br/>
-  <%= field.label :info %>
-  <%= field.text_field :info %>
-  <%= field.hidden_field :group_id, :value => @group.id %>
-  <%= field.submit %>
+
+<%= form_for @lunch, url: group_lunches_path(@group, @lunch), :html => { :class => 'form-horizontal' } do |field| %>
+  <div class="form-group">
+    <%= field.label :name %>
+    <%= field.text_field :name %> <br/>
+  </div>
+  <div class="form-group">
+    <%= field.label :time %>
+    <%= field.datetime_select :time, :minute_step => 5 %><br/>
+  </div>
+  <div class="form-group">
+    <%= field.label :info %>
+    <%= field.text_field :info %>
+  </div>
+  <div class="form-group">
+    <%= field.hidden_field :group_id, :value => @group.id %>
+    <%= field.submit :class => 'btn btn-default'  %>
+  </div>
 <% end %>
 
 <%= flash[:notice] %>

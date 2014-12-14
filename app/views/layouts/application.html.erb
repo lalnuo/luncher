@@ -8,6 +8,24 @@
 </head>
 <body>
 
+<%= nav_bar :brand => 'Lunchr', :responsive => true do %>
+  <% if !session[:group_id] %>
+    <%= menu_group :pull => :right do %>
+      <%= menu_item 'Register', '/wat' %>
+      <%= form_for Group.new, :html => { :class => 'navbar-form navbar-right', :role => 'search' } do |f| %>
+        <%= f.text_field :name, :placeholder => 'Username', :class => 'form-control' %>
+        <%= f.password_field :password, :placeholder => 'Password', :class => 'form-control' %>
+        <%= f.submit 'Login', :class => 'btn btn-success', :class => 'form-control' %>
+      <% end %>
+    <% end %>
+      <% else %>
+    <%= menu_group do %>
+
+      <%= menu_item 'Log out', logout_path, :method => :delete %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <%= yield %>
 
 </body>
