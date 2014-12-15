@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.error {
+    color: red !important;
+    font-style: italic;
+}

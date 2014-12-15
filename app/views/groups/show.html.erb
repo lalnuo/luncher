@@ -9,11 +9,11 @@
 <%= form_for @lunch, url: group_lunches_path(@group, @lunch), :html => { :class => 'form-horizontal' } do |field| %>
   <div class="form-group">
     <%= field.label :name %>
-    <%= field.text_field :name %> <br/>
+    <%= field.text_field :name %>
   </div>
   <div class="form-group">
     <%= field.label :time %>
-    <%= field.datetime_select :time, :minute_step => 5 %><br/>
+    <%= field.datetime_select :time, :minute_step => 5 %>
   </div>
   <div class="form-group">
     <%= field.label :info %>

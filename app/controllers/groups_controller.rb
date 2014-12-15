@@ -1,17 +1,19 @@
+# TODO: auths group level and user level
 class GroupsController < ApplicationController
   def index
   end
 
   def show
-    render :action => 'index' unless session[:group_id].to_i == params[:id].to_i
+    render :action => 'index' unless UserGroup.find_by(:user_id => session[:user_id], :group_id => params[:id])
     @group = Group.find(params[:id])
     @lunch = Lunch.new(:group_id => @group.id)
   end
 
 
+  # TODO auth
   def create
     group =  Group.find_by(:name => params[:group][:name]) || Group.create(group_params)
-    session[:group_id] = group.id if group.authenticate(params[:group][:password])
+    UserGroup.create(:group_id => group.id, :user_id => session[:user_id])
     redirect_to group
   end
 

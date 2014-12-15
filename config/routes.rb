@@ -3,8 +3,14 @@ Rails.application.routes.draw do
     resources :lunches
   end
 
-  delete '/logout', :to => 'groups#logout'
+  resources(:users)
+  delete '/logout', :to => 'users#logout'
+  post '/login', :to => 'users#login'
+  get '/home', :to => 'users#home'
 
   root :to => 'groups#index'
   resources :registrations, :only => [:create]
+  resources :user_groups
+
+
 end

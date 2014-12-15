@@ -1,0 +1,14 @@
+<h4> Todays lunches in your groups: </h2>
+
+<% @user.groups.each do |group| %>
+
+  <h4><%= link_to(group.name, group) %></h4>
+      <ul>
+          <% if group.todays_lunches.empty? %>
+            <i>No lunches today</i>
+          <% end %>
+          <% group.todays_lunches.each do |lunch| %>
+            <li><%= link_to(lunch.name, group_lunch_path(group, lunch)) %> </li>
+          <% end %>
+      </ul>
+<% end %>
