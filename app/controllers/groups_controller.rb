@@ -3,6 +3,7 @@ class GroupsController < ApplicationController
   before_action :redirect_to_root_if_not_logged
 
   def index
+    @groups = Group.public_groups
   end
 
   def show
@@ -12,14 +13,19 @@ class GroupsController < ApplicationController
   end
 
   def create
-    group =  Group.find_by(:name => params[:group][:name]) || Group.create(group_params)
-    UserGroup.create(:group_id => group.id, :user_id => session[:user_id])
-    redirect_to group
+    group = Group.new(group_params)
+    group.city = group.city.capitalize
+    if group.save
+      UserGroup.create(:group_id => group.id, :user_id => session[:user_id])
+      redirect_to group
+    else
+      redirect_to :back # TODO add error message about missing fields
+    end
   end
 
   private
 
   def group_params
-    params.require(:group).permit(:name, :password)
+    params.require(:group).permit(:name, :password, :city, :public)
   end
 end

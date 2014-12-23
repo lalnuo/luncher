@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223203756) do
+ActiveRecord::Schema.define(version: 20141223221717) do
 
   create_table "groups", force: true do |t|
     t.string   "name"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "city"
+    t.boolean  "public"
   end
 
   create_table "lunches", force: true do |t|

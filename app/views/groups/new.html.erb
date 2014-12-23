@@ -8,6 +8,16 @@
       <%= f.password_field :password, :class => 'form-control' %>
   </div>
   <div class="form-group">
-      <%= f.submit :name, :class => 'btn btn-success' %>
+      <%= f.label :city %>
+      <%= f.text_field :city, :class => 'form-control' %>
   </div>
+  <div class="checkbox">
+    <label>
+      <%= f.check_box  :public, {}, true, false %> Public group
+    </label>
+  </div>
+  <div class="form-group">
+      <%= f.submit 'Create new group', :class => 'btn btn-success' %>
+  </div>
+
 <% end %>
