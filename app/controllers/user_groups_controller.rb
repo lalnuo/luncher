@@ -1,6 +1,7 @@
 class UserGroupsController < ApplicationController
+  before_action :redirect_to_root_if_not_logged
+
   def create
-    redirect :root unless session[:user_id]
     g = Group.find_by(:name => params[:name])
     if g && g.authenticate(params[:password])
       UserGroup.create(:group_id => g.id, :user_id => session[:user_id])

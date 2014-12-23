@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   post '/login', :to => 'users#login'
   get '/home', :to => 'users#home'
 
-  root :to => 'groups#index'
-  resources :registrations, :only => [:create]
+  root :to => 'users#index'
+  resources :registrations, :only => [:create, :destroy]
   resources :user_groups
 
 

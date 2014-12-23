@@ -1,5 +1,7 @@
-# TODO: auths group level and user level
+# TODO: auths group level
 class GroupsController < ApplicationController
+  before_action :redirect_to_root_if_not_logged
+
   def index
   end
 
@@ -9,17 +11,10 @@ class GroupsController < ApplicationController
     @lunch = Lunch.new(:group_id => @group.id)
   end
 
-
-  # TODO auth
   def create
     group =  Group.find_by(:name => params[:group][:name]) || Group.create(group_params)
     UserGroup.create(:group_id => group.id, :user_id => session[:user_id])
     redirect_to group
-  end
-
-  def logout
-    session[:group_id] = nil
-    redirect_to :root
   end
 
   private

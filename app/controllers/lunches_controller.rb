@@ -1,4 +1,5 @@
 class LunchesController < ApplicationController
+  before_action :redirect_to_root_if_not_logged
 
   def create
     lunch = Lunch.new(post_params)

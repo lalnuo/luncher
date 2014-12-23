@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  def create
-    u = User.create(user_params)
+  before_action :redirect_to_root_if_not_logged, :only => [:home, :show]
 
+  def create
+    User.create(user_params)
     redirect_to :root
   end
 
@@ -9,20 +10,20 @@ class UsersController < ApplicationController
 
   end
 
-  def home
-    @user = User.find(session[:user_id])
-    render 'show'
+  def index
+
   end
 
   def show
-    @user = User.find(params[:user_id])
+    @user = User.find(session[:user_id])
+    render 'show'
   end
 
   def login
     user = User.login(params[:user][:username], params[:user][:password])
     if user
       session[:user_id] = user.id
-      redirect_to :action => 'home'
+      redirect_to user
     else
       flash[:error] = 'Wrong username or password'
       redirect_to :back

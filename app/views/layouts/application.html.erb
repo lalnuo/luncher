@@ -21,7 +21,7 @@
     <% end %>
       <% else %>
     <%= menu_group do %>
-      <%= menu_item 'Home', '/home' %>
+      <%= menu_item 'Home', user_path(current_user.id) %>
       <%= menu_item 'Join a group', new_user_group_path %>
       <%= menu_item 'Create new group', new_group_path %>
     <% end %>

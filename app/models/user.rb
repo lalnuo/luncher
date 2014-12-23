@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :user_groups
   has_many :groups, :through => :user_groups
+  has_many :registrations
 
   validates :username, :uniqueness => true
   validates :username, :presence => true
