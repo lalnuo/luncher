@@ -1,13 +1,24 @@
-# TODO: auths group level
 class GroupsController < ApplicationController
   before_action :redirect_to_root_if_not_logged
 
   def index
-    @groups = Group.public_groups
+    @groups = []
+    if params[:city]
+      @city = params[:city].capitalize
+      @groups = Group.where(:public => true, :city => @city)
+    end
+  end
+
+  def search
+    redirect_to :action => :index, :city => params[:group][:city]
   end
 
   def show
-    render :action => 'index' unless UserGroup.find_by(:user_id => session[:user_id], :group_id => params[:id])
+    group = Group.find(params[:id])
+    unless group.user_has_access?(current_user.id)
+      render :action => 'index'
+    end
+
     @group = Group.find(params[:id])
     @lunch = Lunch.new(:group_id => @group.id)
   end

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/login', :to => 'users#login'
   get '/home', :to => 'users#home'
 
+  post '/groups/search', :to => 'groups#search'
   root :to => 'users#index'
   resources :registrations, :only => [:create, :destroy]
   resources :user_groups

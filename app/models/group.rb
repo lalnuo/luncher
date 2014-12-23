@@ -15,6 +15,13 @@ class Group < ActiveRecord::Base
     }
   end
 
+  def user_has_access?(user_id)
+    if self.public
+      return true
+    end
+    self.users.include(User.find(user_id))
+  end
+
   def self.create_or_auth(group_params)
     group =  Group.find_or_create_by(group_params)
     session[:group_id] = group.id
