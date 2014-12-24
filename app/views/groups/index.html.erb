@@ -1,5 +1,5 @@
 <div class="col-md-4 col-md-offset-1" >
-<%= form_for(Group.new, :url => 'groups/search_by_city', :html => { :class => 'form-horizontal' }) do |f| %>
+<%= form_for(Group.new, :url => 'search_by_city', :method => 'get',  :html => { :class => 'form-horizontal' }) do |f| %>
   <div class="form-group">
       <%= f.label :city %>
       <%= f.text_field :city, :class => 'form-control' %>
@@ -16,7 +16,7 @@
 <% end %>
 </div>
 <div class="col-md-4 col-md-offset-2" >
-    <%= form_for(Group.new, :url => 'groups/search_secret_group', :html => { :class => 'form-horizontal' }) do |f| %>
+    <%= form_for(Group.new, :url => 'search_secret_group', :method => 'get', :html => { :class => 'form-horizontal' }) do |f| %>
       <div class="form-group">
           <%= f.label :name %>
           <%= f.text_field :name, :class => 'form-control' %>

@@ -2,18 +2,14 @@ class GroupsController < ApplicationController
   before_action :redirect_to_root_if_not_logged
 
   def index
-    @groups = []
-    if params[:city]
-      @city = params[:city].capitalize
-      @groups = Group.where(:public => true, :city => @city)
-    end
+    @groups = params[:groups] || []
   end
 
   def search_by_city
-    if params[:group][:city]
-      redirect_to :action => :index, :city => params[:group][:city]
-      return
-    end
+    @groups = Group.where(:city => params[:group][:city].capitalize) if params[:group] && params[:group][:city]
+    @groups ||= []
+    @city = params[:group][:city]
+    render :index
   end
 
   def search_secret_group
@@ -32,10 +28,9 @@ class GroupsController < ApplicationController
 
   def show
     group = Group.find(params[:id])
-    unless group.user_has_access?(current_user.id, session[:group_permissions] || [])
+    unless group.user_has_access?(current_user.id, session[:group_permissions])
       render :action => 'index'
     end
-
     @group = Group.find(params[:id])
     @lunch = Lunch.new(:group_id => @group.id)
   end
