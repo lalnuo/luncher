@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     user = User.login(params[:user][:username], params[:user][:password])
     if user
       session[:user_id] = user.id
+      session[:group_permissions] = []
       redirect_to user
     else
       flash[:error] = 'Wrong username or password'

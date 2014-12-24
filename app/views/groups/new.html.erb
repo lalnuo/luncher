@@ -1,23 +1,25 @@
-<%= form_for(Group.new, :html => { :class => 'form-horizontal' }) do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, :class => 'form-control' %>
-  </div>
-  <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, :class => 'form-control' %>
-  </div>
-  <div class="form-group">
-      <%= f.label :city %>
-      <%= f.text_field :city, :class => 'form-control' %>
-  </div>
-  <div class="checkbox">
-    <label>
-      <%= f.check_box  :public, {}, true, false %> Public group
-    </label>
-  </div>
-  <div class="form-group">
-      <%= f.submit 'Create new group', :class => 'btn btn-success' %>
-  </div>
+<div class="col-md-4 col-md-offset-4" >
+  <%= form_for(Group.new, :html => { :class => 'form-horizontal' }) do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, :class => 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= f.label :city %>
+        <%= f.text_field :city, :class => 'form-control' %>
+    </div>
+    <div class="checkbox">
+      <label>
+        <%= f.check_box  :public, {}, true, false %> Public group
+      </label>
+    </div>
+    <div class="form-group">
+        <%= f.submit 'Create new group', :class => 'btn btn-success' %>
+    </div>
 
-<% end %>
+  <% end %>
+</div>

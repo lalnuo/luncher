@@ -3,7 +3,9 @@ class LunchesController < ApplicationController
 
   def create
     lunch = Lunch.new(post_params)
-    if !lunch.save
+    if lunch.save
+      Registration.create(:user_id => current_user.id, :lunch_id => lunch.id)
+    else
       flash[:notice] = 'Looks like a bad lunch!'
     end
     redirect_to :back

@@ -20,7 +20,6 @@ class GroupsController < ApplicationController
     if params[:group][:name]
       g = Group.find_by_name_and_auth(params[:group][:name], params[:group][:password])
       if g
-        session[:group_permissions] = [] unless session[:group_permissions]
         session[:group_permissions] << g.id
         redirect_to :action => :show, :id => g.id
         return

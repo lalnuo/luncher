@@ -5,8 +5,6 @@ class UserGroupsController < ApplicationController
     g = Group.find(params[:group_id])
     if g && g.user_has_access?(current_user.id, session[:group_permissions])
       UserGroup.create(:group_id => g.id, :user_id => current_user.id)
-    else
-      flash[:error] = 'Wrong group name or password'
     end
     redirect_to :back
   end
