@@ -1,4 +1,5 @@
-<%= form_for(Group.new, :url => 'groups/search', :html => { :class => 'form-horizontal' }) do |f| %>
+<div class="col-md-4 col-md-offset-1" >
+<%= form_for(Group.new, :url => 'groups/search_by_city', :html => { :class => 'form-horizontal' }) do |f| %>
   <div class="form-group">
       <%= f.label :city %>
       <%= f.text_field :city, :class => 'form-control' %>
@@ -13,3 +14,20 @@
 <% @groups.each do |group| %>
   <%= link_to group.name, group %><br/>
 <% end %>
+</div>
+<div class="col-md-4 col-md-offset-2" >
+    <%= form_for(Group.new, :url => 'groups/search_secret_group', :html => { :class => 'form-horizontal' }) do |f| %>
+      <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, :class => 'form-control' %>
+      </div>
+      <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, :class => 'form-control' %>
+      </div>
+      <div class="form-group">
+          <%= f.submit 'Search a secret group', :class => 'btn btn-success' %>
+      </div>
+    <% end %>
+    <%= notice %>
+</div>

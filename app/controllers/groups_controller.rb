@@ -9,13 +9,31 @@ class GroupsController < ApplicationController
     end
   end
 
-  def search
-    redirect_to :action => :index, :city => params[:group][:city]
+  def search_by_city
+    if params[:group][:city]
+      redirect_to :action => :index, :city => params[:group][:city]
+      return
+    end
+  end
+
+  def search_secret_group
+    if params[:group][:name]
+      g = Group.find_by_name_and_auth(params[:group][:name], params[:group][:password])
+      if g
+        session[:group_permissions] = [] unless session[:group_permissions]
+        session[:group_permissions] << g.id
+        redirect_to :action => :show, :id => g.id
+        return
+      end
+    else
+      flash[:notice] = 'Incorrect group name or password'
+      redirect_to :back
+    end
   end
 
   def show
     group = Group.find(params[:id])
-    unless group.user_has_access?(current_user.id)
+    unless group.user_has_access?(current_user.id, session[:group_permissions] || [])
       render :action => 'index'
     end
 

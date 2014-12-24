@@ -1,3 +1,9 @@
+<% if !current_user.groups.include?(@group) %>
+  <%= button_to 'Join group', {:controller => :user_groups, :action => :create, :group_id => @group.id }, :class => 'btn btn-success' %>
+
+<% else %>
+  <%= button_to 'Leave group', {:controller => :user_groups, :action => :destroy, :group_id => @group.id }, :method => :delete, :class => 'btn btn-danger' %>
+<% end %>
 <h2><%= @group.name %></h2>
 <h3>Lunches today</h3>
 <% @group.todays_lunches.each do |lunch| %>
